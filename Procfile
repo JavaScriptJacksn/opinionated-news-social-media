@@ -1,0 +1,1 @@
+web: gunicorn opinionated_news.wsgi
