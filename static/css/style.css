@@ -2,3 +2,9 @@
     width: 80%;
     margin: 0 auto;
 }
+
+.btn-like {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
