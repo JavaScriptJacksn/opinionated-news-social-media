@@ -28,3 +28,7 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(approved=True)
+
+@admin.register(models.Poll)
+class PollAdmin(admin.ModelAdmin):
+    list_display = ('post',)

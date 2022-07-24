@@ -1,5 +1,5 @@
-from .models import Comment
 from django import forms
+from .models import Comment, Poll
 
 
 class CommentForm(forms.ModelForm):

@@ -19,6 +19,60 @@
         </div>
     </div>
 </div>
+{% if poll %}
+        <div class="container">
+            <small class="text-secondary">Drop a vote in the poll below!</small>
+            <h3>{{ poll.question }}</h3>
+            <hr>
+
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{poll.option1_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
+                        {{ poll.option1 }} - {{poll.option1_value}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{poll.option2_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
+                        {{ poll.option2 }} - {{poll.option2_value}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{poll.option3_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
+                        {{ poll.option3 }} - {{poll.option3_value}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{poll.option4_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
+                        {{ poll.option4 }} - {{poll.option4_value}}</div>
+                </div>
+            </div>
+            
+            {% if user.is_authenticated %}
+            
+                {% if voted %}
+            
+                <small class="text-secondary">You've already voted on this poll!</small>
+
+                {% else %}
+
+                <!--Users can only see the vote button if they are authenticated and haven't voted-->
+                <a class="btn btn-primary" href="{% url 'post_poll' post.slug %}">Vote</a>
+
+                {% endif %}
+
+            {% else %}
+
+            <small class="text-secondary">Login to vote on this poll</small>
+            
+            {% endif %}
+
+            <small class="text-secondary">Total votes: {{ poll.number_of_votes }}</small>
+        </div>
+
+{% endif %}
 
 <div class="container">
     <div class="row">
@@ -69,6 +123,7 @@
             </div>
         </div>
     </div>
+    {{ endif }}
     <div class="row">
         <div class="col">
             <hr>

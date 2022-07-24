@@ -8,3 +8,16 @@
     border: none;
     cursor: pointer;
 }
+
+.progress {
+    width: 75%;
+    margin-bottom: 2.5em;
+    height: 5%;
+    font-size: 1.5em;
+}
+
+.poll-button {
+    margin-left: 2em;
+    font-size: 1em;
+    height: fit-content;
+}

@@ -31,6 +31,31 @@ class Post(models.Model):
         return self.likes.count()
 
 
+class Poll(models.Model):
+    # One to One ensures one poll per post
+    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+
+    question = models.CharField(max_length=200, unique=True)
+    option1 = models.CharField(max_length=50)
+    option2 = models.CharField(max_length=50)
+    option3 = models.CharField(max_length=50)
+    option4 = models.CharField(max_length=50)
+
+    option1_value = models.IntegerField(default=0)
+    option2_value = models.IntegerField(default=0)
+    option3_value = models.IntegerField(default=0)
+    option4_value = models.IntegerField(default=0)
+
+    total_voters = models.ManyToManyField(
+        User, related_name='blogpost_poll', blank=True)
+
+    def number_of_votes(self):
+        return self.total_voters.count()
+
+    class Meta:
+        ordering = ["post"]
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name="comments")
