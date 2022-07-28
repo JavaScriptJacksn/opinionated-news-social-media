@@ -19,7 +19,15 @@
         </div>
     </div>
 </div>
-{% if poll %}
+
+<div class="container">
+    <div class="row">
+        <div class="col card mb-4  mt-3 left  top">
+            <div class="card-body">
+                <p class="card-text ">
+                    {{ post.content | safe }}
+                </p>
+                {% if poll %}
         <div class="container">
             <small class="text-secondary">Drop a vote in the poll below!</small>
             <h3>{{ poll.question }}</h3>
@@ -74,13 +82,6 @@
 
 {% endif %}
 
-<div class="container">
-    <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
-            <div class="card-body">
-                <p class="card-text ">
-                    {{ post.content | safe }}
-                </p>
                 <div class="row">
 
                     <!--Likes-->

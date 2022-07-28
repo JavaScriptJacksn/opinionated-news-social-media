@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.template.defaultfilters import slugify
 from .models import Post, Poll
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 class PostList(generic.ListView):
@@ -130,3 +131,27 @@ class PostPoll(View):
         poll.save()
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class Profile(View):
+    def get(self, request, user):
+        return render(request, 'profile.html')
+
+
+class CreatePost(View):
+
+    def get(self, request):
+        return render(request, 'create_post.html', {
+            'post_form': PostForm,
+        })
+
+    def post(self, request):
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.slug = slugify(post.title)
+            post.save()
+            return HttpResponseRedirect(reverse('profile', args=[request.user]))
+
+        return render(request, 'create_post.html', {'post_form': form})
