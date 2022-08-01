@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+  
+    <h3><em>Opinionate</em> this post:</h3>
+    <form method="post" style="margin-top: 1.3em;">
+        
+        {{ edit_form | crispy }}
+        
+        {% csrf_token %}
+        
+        <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+    </form>
+
+
+{% endblock %}

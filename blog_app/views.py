@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.template.defaultfilters import slugify
 from .models import Post, Poll
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, EditForm
 
 
 class PostList(generic.ListView):
@@ -133,9 +133,24 @@ class PostPoll(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class Profile(View):
-    def get(self, request, user):
-        return render(request, 'profile.html')
+class Profile(generic.ListView):
+    model = Post
+    template_name = "profile.html"
+    paginate_by = 6
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
+
+    def post(self, request):
+        
+        if 'edit' in request.POST:
+            slug = request.POST['edit']
+            return HttpResponseRedirect(reverse('edit_post', args=[slug]))
+        elif 'delete' in request.POST:
+            slug = request.POST['delete']
+            Post.objects.filter(slug=slug).delete()
+
+        return HttpResponseRedirect(reverse('profile'))
 
 
 class CreatePost(View):
@@ -152,6 +167,25 @@ class CreatePost(View):
             post.author = request.user
             post.slug = slugify(post.title)
             post.save()
-            return HttpResponseRedirect(reverse('profile', args=[request.user]))
+            return HttpResponseRedirect(reverse('profile'))
 
         return render(request, 'create_post.html', {'post_form': form})
+
+
+class EditPost(View):
+
+    def get(self, request, slug):
+        return render(request, 'create_post.html', {
+            'post_form': EditForm,
+        })
+
+    def post(self, request, slug):
+        queryset = Post.objects.filter(slug=slug)
+        post_instance = get_object_or_404(queryset)
+        form = EditForm(request.POST, instance=post_instance)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return HttpResponseRedirect(reverse('profile'))
+
+        return render(request, 'edit_post.html', {'post_form': form})

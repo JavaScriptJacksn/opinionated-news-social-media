@@ -19,3 +19,8 @@ class PostForm(forms.ModelForm):
         if Post.objects.filter(title=title).exists():
             raise forms.ValidationError("Title already exists")
         return title
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ["content", "featured_image", "excerpt", "status"]
