@@ -1,18 +1,19 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from .models import Post, Poll
-from .forms import CommentForm, PostForm, EditForm
+from .forms import CommentForm, PostForm, EditForm, PollForm, EditPollForm
 
-
+# Home page
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 6
 
-
+# Post detail
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
@@ -39,7 +40,7 @@ class PostDetail(View):
                 voted = True
             context["voted"] = voted
             context["poll"] = poll
-       
+
         return render(request, "post_detail.html", context)
 
     def post(self, request, slug, *args, **kwargs):
@@ -79,7 +80,7 @@ class PostDetail(View):
 
         return render(request, "post_detail.html", context)
 
-
+# Post likes
 class PostLike(View):
 
     def post(self, request, slug):
@@ -92,7 +93,7 @@ class PostLike(View):
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-
+# Post poll
 class PostPoll(View):
 
     def get(self, request, slug):
@@ -132,7 +133,7 @@ class PostPoll(View):
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
-
+# User profile
 class Profile(generic.ListView):
     model = Post
     template_name = "profile.html"
@@ -142,7 +143,7 @@ class Profile(generic.ListView):
         return Post.objects.filter(author=self.request.user)
 
     def post(self, request):
-        
+
         if 'edit' in request.POST:
             slug = request.POST['edit']
             return HttpResponseRedirect(reverse('edit_post', args=[slug]))
@@ -152,7 +153,7 @@ class Profile(generic.ListView):
 
         return HttpResponseRedirect(reverse('profile'))
 
-
+# Create post
 class CreatePost(View):
 
     def get(self, request):
@@ -166,12 +167,33 @@ class CreatePost(View):
             post = form.save(commit=False)
             post.author = request.user
             post.slug = slugify(post.title)
+            slug = post.slug
             post.save()
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('create_poll', args=[slug]))
 
         return render(request, 'create_post.html', {'post_form': form})
 
+# Create Poll
+class CreatePoll(View):
 
+    def get(self, request, slug):
+        return render(request, 'create_poll.html', {
+            'poll_form': PollForm,
+        })
+    
+    def post(self, request, slug):
+        form = PollForm(request.POST)
+        if form.is_valid():
+            poll = form.save(commit=False)
+            queryset = Post.objects.filter(slug=slug)
+            post = get_object_or_404(queryset)
+            poll.post = post
+            poll.save()
+            return HttpResponseRedirect(reverse('profile'))
+        return render(request, 'create_poll.html', {'poll_form': form})
+
+
+# Edit Post
 class EditPost(View):
 
     def get(self, request, slug):
@@ -186,6 +208,41 @@ class EditPost(View):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return HttpResponseRedirect(reverse('profile'))
+            return HttpResponseRedirect(reverse('edit_poll', args=[slug]))
 
         return render(request, 'edit_post.html', {'post_form': form})
+
+# Edit/Add new Poll
+class EditPoll(View):
+    def get(self, request, slug):
+        # Redirect to add new Poll if one does not exist for post
+        queryset = Post.objects.filter(slug=slug)
+        post = get_object_or_404(queryset)
+        if Poll.objects.filter(post=post).exists():
+            return render(request, 'edit_poll.html', {
+                'edit_poll_form': EditPollForm,
+            })
+        else:
+            return HttpResponseRedirect(reverse('create_poll', args=[slug]))
+
+    def post(self, request, slug):
+        queryset = Post.objects.filter(slug=slug)
+        post = get_object_or_404(queryset)
+        poll_queryset = Poll.objects.filter(post=post)
+        poll_instance = get_object_or_404(poll_queryset)
+        form = EditPollForm(request.POST, instance=poll_instance)
+        if form.is_valid():
+            poll = form.save(commit=False)
+            # Rest votes and voter count
+            # Ensures no tampering with results
+            # E.g. changing names of winning option with losing option
+            poll.option1_value = 0
+            poll.option2_value = 0
+            poll.option3_value = 0
+            poll.option4_value = 0
+            poll.total_voters.clear()
+            poll.save()
+            return HttpResponseRedirect(reverse('profile'))
+        return render(request, 'edit_poll.html', {
+            'edit_poll_form': form
+        })

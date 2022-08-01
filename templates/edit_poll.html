@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h3>Edit Poll</h3>
+    <p>Current votes will be removed!</p>
+    <p>As I'm sure you may want to tamper with results of public opinion... tis' not what this site stands for!</p>
+    <a href="{% url 'profile' %}"><h5>Skip editing your Poll</h5></a>
+    
+    <form method="post">
+        {{ edit_poll_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+    </form>
+
+{% endblock %}

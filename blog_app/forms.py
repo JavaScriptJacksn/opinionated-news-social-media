@@ -1,13 +1,14 @@
 from django import forms
 from django.shortcuts import get_object_or_404
-from .models import Comment, Post
+from .models import Comment, Post, Poll
 
-
+# Comments
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
 
+# Create Post
 class PostForm(forms.ModelForm):
 
     class Meta:
@@ -20,7 +21,28 @@ class PostForm(forms.ModelForm):
             raise forms.ValidationError("Title already exists")
         return title
 
+# Create Poll
+class PollForm(forms.ModelForm):
+
+    class Meta:
+        model = Poll
+        fields = ['question', 'option1', 'option2', 'option3', 'option4']
+
+    def clean_post(self):
+        post = self.cleaned_data['post']
+        if Poll.objects.filter(post=post).exists():
+            raise forms.ValidationError("Poll for this post alreadt exists")
+        return post
+
+# Edit Post
 class EditForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ["content", "featured_image", "excerpt", "status"]
+
+
+# Edit Poll
+class EditPollForm(forms.ModelForm):
+    class Meta:
+        model = Poll
+        fields = ['question', 'option1', 'option2', 'option3', 'option4']

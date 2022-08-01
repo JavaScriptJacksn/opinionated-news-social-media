@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h3>Would you like to add a poll to your post?</h3>
+    <a href="{% url 'profile' %}"><h5>Skip adding a Poll</h5></a>
+    
+    <form method="post">
+        {{ poll_form | crispy }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark btn-lg">Add Poll</button>
+    </form>
+
+{% endblock %}

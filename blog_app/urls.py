@@ -22,6 +22,8 @@ urlpatterns = [
     path('like/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('poll/<slug:slug>', views.PostPoll.as_view(), name='post_poll'),
     path('blog_app/create_post/', views.CreatePost.as_view(), name='create_post'),
+    path('blog_app/create_poll/<slug:slug>', views.CreatePoll.as_view(), name='create_poll'),
     path('blog_app/edit_post/<slug:slug>', views.EditPost.as_view(), name='edit_post'),
+    path('blog_app/edit_poll/<slug:slug>', views.EditPoll.as_view(), name='edit_poll'),
     path('blog_app/profile/', views.Profile.as_view(), name='profile'),
 ]
