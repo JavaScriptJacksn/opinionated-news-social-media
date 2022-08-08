@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<button class="btn"><a href="{% url 'create_post' %}">Post your opinion!</a></button>
+<div class="post-opinion">
+    <a href="{% url 'create_post' %}"><button class="btn opinion-btn">Post your opinion!</button></a>
+</div>
 <div class="container-fluid">
     <div class="row">
 
@@ -33,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                {% if forloop.counter|divisibleby:3 %}
+            {% if forloop.counter|divisibleby:3 %}
             </div>
             <div class="row">
                 {% endif %}

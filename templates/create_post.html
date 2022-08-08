@@ -2,12 +2,14 @@
 
 {% load crispy_forms_tags %}
 
+{% load cloudinary }
+
 {% block content %}
 
 {% if user.is_authenticated %}
     
     <h3><em>Opinionate</em> this post:</h3>
-    <form method="post" style="margin-top: 1.3em;">
+    <form method="post" style="margin-top: 1.3em;" enctype="multipart/form-data">
         
         {{ post_form | crispy }}
         

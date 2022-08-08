@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+from cloudinary.forms import cl_init_js_callbacks  
 from django.template.defaultfilters import slugify
 from .models import Post, Poll
 from .forms import CommentForm, PostForm, EditForm, PollForm, EditPollForm
@@ -162,7 +162,7 @@ class CreatePost(View):
         })
 
     def post(self, request):
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -180,7 +180,7 @@ class CreatePoll(View):
         return render(request, 'create_poll.html', {
             'poll_form': PollForm,
         })
-    
+
     def post(self, request, slug):
         form = PollForm(request.POST)
         if form.is_valid():
@@ -197,8 +197,11 @@ class CreatePoll(View):
 class EditPost(View):
 
     def get(self, request, slug):
+        queryset = Post.objects.filter(slug=slug)
+        post_instance = get_object_or_404(queryset)
+        form = EditForm(instance=post_instance)
         return render(request, 'create_post.html', {
-            'post_form': EditForm,
+            'post_form': form,
         })
 
     def post(self, request, slug):
@@ -218,9 +221,13 @@ class EditPoll(View):
         # Redirect to add new Poll if one does not exist for post
         queryset = Post.objects.filter(slug=slug)
         post = get_object_or_404(queryset)
-        if Poll.objects.filter(post=post).exists():
+        poll_queryset = Poll.objects.filter(post=post)
+
+        if poll_queryset:
+            poll = get_object_or_404(poll_queryset)
+            form = EditPollForm(instance=poll)
             return render(request, 'edit_poll.html', {
-                'edit_poll_form': EditPollForm,
+                'edit_poll_form': form,
             })
         else:
             return HttpResponseRedirect(reverse('create_poll', args=[slug]))

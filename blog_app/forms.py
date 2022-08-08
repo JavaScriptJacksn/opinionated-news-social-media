@@ -1,5 +1,5 @@
 from django import forms
-from django.shortcuts import get_object_or_404
+from cloudinary.forms import CloudinaryFileField 
 from .models import Comment, Post, Poll
 
 # Comments
