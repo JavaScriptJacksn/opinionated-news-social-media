@@ -150,3 +150,14 @@ footer {
 .account-container {
     margin-top: 25vh;
 }
+
+/* Forms */
+
+.summernote-div > iframe {
+    width: 90%;
+}
+
+.post-form {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
