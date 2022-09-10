@@ -38,6 +38,7 @@ class PostDetail(View):
             voted = False
             if poll.total_voters.filter(id=self.request.user.id).exists():
                 voted = True
+
             context["voted"] = voted
             context["poll"] = poll
 

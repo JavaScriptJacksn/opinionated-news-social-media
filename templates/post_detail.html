@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 <div class="masthead">
-    <div class="container">
+    <div class="container mt-5">
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
                 <h1 class="post-title">{{ post.title }}</h1>
@@ -27,65 +27,69 @@
                 <p class="card-text ">
                     {{ post.content | safe }}
                 </p>
+
+                <!--Poll-->
+            
                 {% if poll %}
         <div class="container">
             <small class="text-secondary">Drop a vote in the poll below!</small>
-            <h3>{{ poll.question }}</h3>
+            <h3 class="poll-title">{{ poll.question }}</h3>
             <hr>
 
-            <div class="row">
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{poll.option1_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
-                        {{ poll.option1 }} - {{poll.option1_value}}</div>
-                </div>
+            <div class="row mb-2">
+                <div class="col-md-12 d-inline poll-option">{{ poll.option1 }}
+                <div class="d-inline float-right poll-value">{{ poll.option1_value }}</div>
             </div>
-            <div class="row">
-                <div class="progress">
-                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="{{poll.option2_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
-                        {{ poll.option2 }} - {{poll.option2_value}}</div>
-                </div>
             </div>
-            <div class="row">
-                <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{poll.option3_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
-                        {{ poll.option3 }} - {{poll.option3_value}}</div>
-                </div>
+            <div class="row mb-2">
+                <div class="col-md-12 d-inline poll-option">{{ poll.option2 }}
+                <div class="d-inline float-right poll-value">{{ poll.option2_value }}</div>
             </div>
-            <div class="row">
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{poll.option4_value|slugify}}"  aria-valuemin="0" aria-valuemax="100">
-                        {{ poll.option4 }} - {{poll.option4_value}}</div>
-                </div>
             </div>
+            <div class="row mb-2">
+                <div class="col-md-12 d-inline poll-option">{{ poll.option3 }}
+                <div class="d-inline float-right poll-value">{{ poll.option3_value }}</div>
+            </div>     
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-12 d-inline poll-option">{{ poll.option4 }}
+                <div class="d-inline float-right poll-value">{{ poll.option4_value }}</div>
+            </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-6 mt-3">
             
             {% if user.is_authenticated %}
             
                 {% if voted %}
-            
                 <small class="text-secondary">You've already voted on this poll!</small>
 
                 {% else %}
 
                 <!--Users can only see the vote button if they are authenticated and haven't voted-->
+                <div>
                 <a class="btn btn-primary" href="{% url 'post_poll' post.slug %}">Vote</a>
+            </div>
 
                 {% endif %}
 
             {% else %}
 
-            <small class="text-secondary">Login to vote on this poll</small>
+            <small class="text-secondary">Login to vote on this poll.</small>
             
             {% endif %}
 
             <small class="text-secondary">Total votes: {{ poll.number_of_votes }}</small>
         </div>
+        </div>
+        </div>
 
 {% endif %}
 
-                <div class="row">
+                <div class="row mt-3">
 
                     <!--Likes-->
-                    <div class="col-1">
+                    <div class="col-4">
                         <strong>
                             {% if user.is_authenticated %}
                             <form class="d-inline" action="{% url 'post_like' post.slug %}" method="POST">
@@ -114,7 +118,7 @@
 
                     </div>
                     <!--Comments counter-->
-                    <div class="col-1">
+                    <div class="col-4">
                         {% with comments.count as total_comments %}
                         <strong class="text-secondary"><i class="far fa-comments"></i>
                             {{ total_comments }}</strong>
@@ -131,7 +135,7 @@
         </div>
     </div>
     <!--Comments-->
-    <div class="row">
+    <div class="row comments-row">
         <div class="col-md-8 card mb-4  mt-3 ">
             <h3>Comments:</h3>
             <div class="card-body">
@@ -160,7 +164,7 @@
                 <form method="post" style="margin-top: 1.3em;">
                     {{ comment_form | crispy }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                 {% endif %}
                 {% endif %}
