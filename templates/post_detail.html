@@ -139,6 +139,12 @@
         <div class="col-md-8 card mb-4  mt-3 ">
             <h3>Comments:</h3>
             <div class="card-body">
+                
+                {% if not user.is_authenticated %}
+                <span class="test-secondary"> Login to leave a comment! </span>
+                
+                {% endif %}
+
                 {% for comment in comments %}
                 <div class="comments" style="padding: 10px;">
                     <p class="font-weight-bold">

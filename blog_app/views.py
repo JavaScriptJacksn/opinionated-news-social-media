@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from cloudinary.forms import cl_init_js_callbacks  
 from django.template.defaultfilters import slugify
 from .models import Post, Poll
 from .forms import CommentForm, PostForm, EditForm, PollForm, EditPollForm
+
 
 # Home page
 class PostList(generic.ListView):
@@ -12,6 +12,7 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 6
+
 
 # Post detail
 class PostDetail(View):
@@ -81,6 +82,7 @@ class PostDetail(View):
 
         return render(request, "post_detail.html", context)
 
+
 # Post likes
 class PostLike(View):
 
@@ -94,13 +96,14 @@ class PostLike(View):
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
+
 # Post poll
 class PostPoll(View):
 
     def get(self, request, slug):
         # For Post model
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug) 
+        post = get_object_or_404(queryset, slug=slug)
         # For Poll model
         queryset_poll = Poll.objects.filter(post=post)
         poll = get_object_or_404(queryset_poll)
@@ -113,7 +116,7 @@ class PostPoll(View):
     def post(self, request, slug):
         # For Post model
         queryset = Post.objects.filter(status=1)
-        post = get_object_or_404(queryset, slug=slug) 
+        post = get_object_or_404(queryset, slug=slug)
         # For Poll model
         queryset_poll = Poll.objects.filter(post=post)
         poll = get_object_or_404(queryset_poll)
@@ -133,6 +136,7 @@ class PostPoll(View):
         poll.save()
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
 
 # User profile
 class Profile(generic.ListView):
@@ -154,6 +158,7 @@ class Profile(generic.ListView):
 
         return HttpResponseRedirect(reverse('profile'))
 
+
 # Create post
 class CreatePost(View):
 
@@ -173,6 +178,7 @@ class CreatePost(View):
             return HttpResponseRedirect(reverse('create_poll', args=[slug]))
 
         return render(request, 'create_post.html', {'post_form': form})
+
 
 # Create Poll
 class CreatePoll(View):
@@ -215,6 +221,7 @@ class EditPost(View):
             return HttpResponseRedirect(reverse('edit_poll', args=[slug]))
 
         return render(request, 'edit_post.html', {'post_form': form})
+
 
 # Edit/Add new Poll
 class EditPoll(View):

@@ -4,6 +4,11 @@ html, body {
     min-height: 100vh;
 }
 
+.wrapper {
+    height: 90%;
+    width: 100%;
+}
+
 /* Base template */
 
 .main {
@@ -45,7 +50,7 @@ html, body {
 footer {
     border-top: 1px solid #f8f9fa;
     background-color: #1DA1F2;
-    width: 100%;
+    width: 100vw;
 }
 
 /* Styles from codestar walkthrough project*/

@@ -27,7 +27,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = ['localhost', 'opinionate-the-unopinionated.herokuapp.com']
 
@@ -88,7 +90,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'opinionated_news.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
