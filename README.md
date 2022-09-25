@@ -222,6 +222,13 @@ Thanks to the security at GitHub and Git Guardian, along with adivce from my men
     - DEBUG was set to False in Django settings
     - Disable collect static was removed
 
+## Credits
+
+- The Code Institue Codestar Blog walkthrough project for giving me a solid foundation to build upon. 
+- Martina, my amazing mentor for helping me understand the requirements of the project and how to deal with the security issue at the start.
+- [Lucid](https://lucid.app/users/login) for the databse diagram tool.
+- And of course, Stack Overflow.
+
 ## Final Thoughts
 
 This project has really shown me the beauty of batteries-included frameworks like Django that connect front-end and back-end technologies so well. The sheer amount of processes abstracted behing simple classes and methods really made creating a Full Stack application straight forward (for the most part...).
