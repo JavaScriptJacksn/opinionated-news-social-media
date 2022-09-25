@@ -9,23 +9,23 @@ A social media site for those *wanting* to hear opinions on news and posts from 
 
 ## Introduction
 
-Opinionated the *Unopinionated* is a social media/blogging application that is made for users that wish to leave any or all sorts of opinions on news stories or current events that in the mainstream are left 'unopinionated".
+Opinionated the *Unopinionated* is a social media/blogging application that is made for users that wish to leave any or all sorts of opinions on news stories or current events that, in the mainstream, are left 'unopinionated".
 
-The project itself extends the Code Institute base Codestar blog with full credit given to the features and inspiration taken from the blog app. From a solid foundation of a data models of posts and comments with like functionality, Opinionate extends this further with a poll feature and the added ability for users to create, edit, draft and publish their own posts and polls through forms that are viewable from a new 'My posts' page.
+The project itself extends the Code Institute base Codestar blog with full credit given to the features and inspiration taken from the blog app. From a solid foundation of data models of posts and comments with like functionality, Opinionate extends this further with a poll feature and the added ability for users to create, edit, draft and publish their own posts and polls through forms that are viewable from a new 'My posts' page.
 
-On the creation of a post, users are prompted to choose whether or not they wish to add a 4-option voting poll attached to their post. Any authenticated user may create and vote on polls. With any changes made to the poll wiping the current votes to ensure no manipulation of gathered information.
+On the creation of a post, users are prompted to choose whether or not they wish to add a 4-option voting poll attached to their post. Any authenticated user may create and vote on polls. With any changes made to the poll the current votes are wiped to ensure no manipulation of gathered information.
 
-On the original base project, comments were left to be authenticated by an admin and this has been left as a feature whilst posts and polls can be published without authorisation. This is by design as with most social media/blogging applications this is the standard. However often comments are the main source of unwanted activity and usually require a karma/experience level to create, therefore on this site they still require authorisation from an admin as such a system is not implemented.
+On the original base project, comments were left to be authenticated by an admin and this has been left as a feature whilst posts and polls can be published without authorisation. This is by design as with most social media/blogging applications this is the standard. However often comments are the main source of unwanted activity and usually require a karma/experience level to create, but on this site they still require authorisation from an admin as such a system is not implemented.
 
 The site features full CRUD functionality for both users and admins, a feature newly added. Users can edit their posts and their respective polls (if applicable) by clicking the 'Edit' button on the desired posts on the 'My Posts' page.
 
 ## Features and Instructions for use
 
-On first entry to the site, users are presented with the 'feed' main page to view all posts
+On first entry to the site, users are presented with the 'feed' main page to view all posts.
 
 <img src="static/media/Feed-1.jpg" alt="feed" width="700"/>
 
-By clicking on a post, users can view the whole post information, including any comments or poll that relates to the post
+By clicking on a post, users can view the whole post information, including any comments or poll that relates to the post.
 
 <img src="static/media/post-detail.jpg" alt="post-detail" width="700"/>
 
@@ -34,33 +34,33 @@ By clicking on a post, users can view the whole post information, including any 
 
 Users can vote on polls and leave comments on posts once logged in.
 
-Users can log in from the navigation link to the Django aullauth account forms
+Users can log in from the navigation link to the Django aullauth account forms.
 
 <img src="static/media/sign-in.jpg" alt="login" width="500"/>
 
 <img src="static/media/sign-up.jpg" alt="sign up" width="500"/>
 
-After authentication, full application functionality is unlocked and users can vote on polls and comment on posts
+After authentication, full application functionality is unlocked and users can vote on polls and comment on posts.
 
 <img src="static/media/comment-and-poll.jpg" alt="vote and comment" width="500"/>
 
 <img src="static/media/vote.jpg" alt="vote form" width="500"/>
 
-Authenticated users can create posts using the 'Post your opinion' button on the feed page
+Authenticated users can create posts using the 'Post your opinion' button on the feed page.
 
 <img src="static/media/create-post.jpg" alt="create post" width="500"/>
 
-After creating a post, whether a draft or published, user are prompted to choose whether to add a poll or not.
+After creating a post, whether a draft or published, users are prompted to choose whether to add a poll or not.
 
 If users 'skip adding a poll' they can always add one at a later date through the edit forms. 
 
 <img src="static/media/create-poll.jpg" alt="create poll" width="500"/>
 
-Users can at any time view their posts published or drafts under the 'My Posts' section in the navigation bar once logged in
+Users can at any time view their posts published or drafts under the 'My Posts' section in the navigation bar once logged in.
 
 <img src="static/media/profile-view.jpg" alt="my posts view" width="500"/>
 
-Clicking 'delete' will prompt a browser alert window to show asking for confirmation before executing the deletion from the database
+Clicking 'delete' will prompt a browser alert window to show, asking for confirmation before executing the deletion from the database.
 
 <img src="static/media/delete-confirmation.jpg" alt="delete confirmation" width="500"/>
 
@@ -77,7 +77,7 @@ Users can skip these sections and are not forced into adding polls if they do no
 
 ## Planning
 
-From the start the application built upon the Codestar Blog's solid foundations and aimed to improve it from a user-interactivity side. In the planning stage, the functionality for everyday site users was the main priority. Initially I played around with the ideas of a scrolling feed, however it became impractical without search functions. Therefore as the planning went on, the app became focused around short-term and current stories, with post search and greater access to older posts being less of a priority.
+From the start, the application built upon the Codestar Blog's solid foundations and aimed to improve it from a user-interactivity side. In the planning stage, the functionality for everyday site users was the main priority. Initially I played around with the ideas of a scrolling feed, however it became impractical without search functions. Therefore as the planning went on, the app became focused around short-term and current stories, with post search and greater access to older posts being less of a priority.
 
 ### Database Model Diagram
 
@@ -102,7 +102,7 @@ During the development of this project, Agile methodologies were implemented wit
 
 ### Agile changes made in development
 
-I found myself spending too much time on the front-end development at the beginning of the project before even starting the database back-end. I realised this was a mis-prioritisation  of my agile sprints and decided to focus on feature user stories and come back to the front end at the end of the project.
+I found myself spending too much time on the front-end development at the beginning of the project before even starting the database back-end. I realised this was a mis-prioritisation  of my agile sprints and decided to focus on feature user stories and come back to the front-end at the end of the project.
 
 In the image of the kanban board below, you can see that the previously mentioned post search functionality was left as a future feature to implement. It was also initially part of the wireframe above, but was de-prioritised during development.
 
@@ -116,11 +116,11 @@ Personally, I found that the Agile methodology aspect of 'Responding to change o
 
 ### Validator testing
 
-All HTML pages were validated using the [W3C Validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fopinionate-the-unopinionated.herokuapp.com%2F)
+All HTML pages were validated using the [W3C Validator.](https://validator.w3.org/nu/?doc=https%3A%2F%2Fopinionate-the-unopinionated.herokuapp.com%2F)
 
-All custom HTML has no errors or warnings. However, the pages where summernote fields were generated from the database (E.g. post-detail.html) the rendering html did cause several errors outside of my control.
+All custom HTML has no errors or warnings. However, the pages where summernote fields were generated from the database (E.g. post-detail.html) the rendering HTML did cause several errors outside of my control.
 
-All CSS was validated with no errors or warnings with the [W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/validator)
+All CSS was validated with no errors or warnings with the [W3C Jigsaw validator.](https://jigsaw.w3.org/css-validator/validator)
 
 All Python was [PEP8](http://pep8online.com/) validated with no errors or warnings.
 
@@ -145,14 +145,14 @@ Chrome lighthouse results
     - Through the admin panel using superuser login credentials, admins can remove and change the status of posts.
     - Admins can delete posts, polls and comments through the admin panel.
 - As a Site User and Admin I can create an account so that I can access the right level of authentication and access to the sites functionality.
-    - Users can create and save an account credentials.
+    - Users can create and save account credentials.
     - Admins can create and save superuser account credentials.
     - User's accounts cannot access any admin functionality.
     - Users cannot access any content that requires authentication without logging in first. 
 - As a Site User I want to be able to vote and view polls, so I can gain a glance view of the general opinions on a question to better interact with other site users.
-    - Users can view polls at the bottom of post's detailed view if the post has an attached poll.
+    - Users can view polls at the bottom of their post's detailed view if the post has an attached poll.
     - Users cannot vote unless authenticated.
-    - Users, once authenticated can vote on polls through the poll form by clicking the 'vote' button.
+    - Users, once authenticated, can vote on polls through the poll form by clicking the 'vote' button.
     - The question, options, results and total votes are displayed to all users, authenticated or not.
 - As a Site User, I want to be able to create posts and polls so that other users may view my activity, so I can initiate discussions with other users of the site.
     - Users, once authenticated, can create posts using the 'Post your opinion' button on the feed page.
@@ -180,11 +180,11 @@ Chrome lighthouse results
 - Edit forms were not loading the correct instance into the prepopulated fields.
     - Solved as test posts created in the admin panel shared the same titles/slugs.
 - Posts did not generate slugs properly from the title.
-    - Solved by making post titles unique (Not used as a PK, as spaces caused issues in urls).
+    - Solved by making post titles unique (Not used as a PK, as spaces caused issues in URLs).
 - The URL configurations with the use of slugs and overlapped in pattern and were matched multiple times causing HTTP errors.
-    - Solved by adding an extra url /blog_app/ pattern to distinguish between overlapping urls.
+    - Solved by adding an extra URL /blog_app/ pattern to distinguish between overlapping URLs.
 - HTML pages were not full-height and the footer raised up on shorter account related pages.
-    - Solved by adding html and body height and min-height values to the Django account pages templates.
+    - Solved by adding HTML and body height and min-height values to the Django account pages templates.
 
 
 #### Existing
@@ -193,11 +193,11 @@ Chrome lighthouse results
     - On the 'My Posts' page, the two inline forms for the 'Edit' and 'Delete' options are not aligned together.
 - Django Summernote
     - On the post creation and editing forms the Django Summernote field is fixed in size.
-    - Whilst this does not break functionality, on smaller viewports it may require horizontal scrolling to view all Summernote text options
+    - Whilst this does not break functionality, on smaller viewports it may require horizontal scrolling to view all Summernote text options.
 
 ## Deployment / Security Issues
 
-### **IMPORTANT AKNOWLEDGEMENT**
+### **IMPORTANT ACKNOWLEDGEMENT**
 
 At the start of the project, during an initial deployment to Heroku, the secret key was pushed to the project's public GitHub repository.
 
@@ -215,12 +215,11 @@ Thanks to the security at GitHub and Git Guardian, along with advice from my men
         - Database URL
         - Cloudinary URL
         - Secret Key (new one after security leak)
-    - The application was deployed early into development to ensure services on  heroku and the postgres database was working
-    - This ensured little issues were encountered at later stages of deployment
-    Config vars for secret keys and database URLs were established
+    - The application was deployed early into development to ensure services on  heroku and the postgres database was working.
+    - This ensured little issues were encountered at later stages of deployment.
 - Final deployments
-    - DEBUG was set to False in Django settings
-    - Disable collect static was removed
+    - DEBUG was set to False in Django settings.
+    - Disable collect static was removed.
 
 ## Credits
 
