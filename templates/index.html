@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="post-opinion">
-    <a href="{% url 'create_post' %}"><button class="btn opinion-btn">Post your opinion!</button></a>
+    <a href="{% url 'create_post' %}" class="btn opinion-btn">Post your opinion!</a>
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -16,10 +16,9 @@
                         <div class="card-body">
                             <div class="image-container">
                                 {% if "placeholder" in post.featured_image.url %}
-                                <img class="card-img-top"
-                                    src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
+                                <img class="card-img-top" alt="placeholer image" src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
                                 {% else %}
-                                <img class="card-img-top" src=" {{ post.featured_image.url }}">
+                                <img class="card-img-top" alt="post image" src=" {{ post.featured_image.url }}">
                                 {% endif %}
                                 <div class="image-flash">
                                     <p class="author">Author: {{ post.author }}</p>
